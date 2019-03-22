@@ -752,9 +752,9 @@ fromtype(::Type{Bool}) = BooleanToken(Bool)
 
 function tryparsenext(::BooleanToken{Bool}, str, i, len, opts)
     value, ii = tryparsenext(StringToken(String), str, i, len, opts)
-    if value.value in ("true", "True")
+    if value.value in default_true_strings
         return Nullable{Bool}(true), ii
-    elseif value.value in ("false", "False")
+    elseif value.value in default_false_strings
         return Nullable{Bool}(false), ii
     else
         return Nullable{Bool}(), ii
